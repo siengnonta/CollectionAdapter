@@ -9,14 +9,12 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-
     private let tableView = UITableView(frame: .zero, style: .plain)
-    private var adapter: Adapter<FeedModel> = FeedAdapter()
+    private var adapter: AdapterType = FeedAdapter()
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupTableView()
     }
     
     private func setupView() {
@@ -28,12 +26,13 @@ class FeedViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-    
-    private func setupTableView() {
-        adapter.setup(in: tableView, cellClasses: [FeedCell.self])
-        tableView.delegate = adapter
-        tableView.dataSource = adapter
+        adapter.tableView = tableView
+        adapter.register(cellClasses: [FeedCell.self])
     }
 
+}
+
+// View Controller
+protocol AdapterAttachable: UIViewController {
+    var adapter: AdapterType? { get set }
 }

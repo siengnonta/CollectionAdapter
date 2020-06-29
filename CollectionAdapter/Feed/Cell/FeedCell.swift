@@ -8,16 +8,15 @@
 
 import UIKit
 
-class FeedCell: UITableViewCell, ConfigurableCell {
+class FeedCell: ListableCell {
     
-//    @IBOutlet private var usernameLabel: UILabel!
-//    @IBOutlet private var titleLabel: UILabel!
-    
-    typealias T = FeedModel
-    
-    func configure(_ item: FeedModel, at indexPath: IndexPath) {
-        textLabel?.text = item.username
-        detailTextLabel?.text = item.title
+    func config(item: Item) {
+        guard let item = item as? FeedModel else {
+            fatalError()
+        }
+        textLabel?.text = item.title
+        detailTextLabel?.text = item.username
     }
+    
 }
 

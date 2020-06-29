@@ -6,9 +6,13 @@
 //  Copyright © 2563 Nontapat Siengsanor. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct FeedModel {
+struct FeedModel: Item {
+//    var cellType: UITableViewCell.Type {
+//        return FeedCell.self
+//    }
+//
     let username: String
     let userId: String
     let title: String

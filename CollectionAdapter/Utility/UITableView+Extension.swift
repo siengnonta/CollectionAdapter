@@ -12,7 +12,7 @@ public protocol ReusableCell {
     static var reuseIdentifier: String { get }
 }
 
-protocol ConfigurableCell: ReusableCell {
+public protocol ConfigurableCell: ReusableCell {
     associatedtype T
     func configure(_ item: T, at indexPath: IndexPath)
 }
