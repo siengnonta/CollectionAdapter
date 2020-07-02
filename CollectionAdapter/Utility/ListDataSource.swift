@@ -9,15 +9,15 @@
 import UIKit
 
 protocol ListDataSourceType: NSObject, UITableViewDataSource {
-    var adapter: AdapterType? { get set }
+    var adapter: ListAdapterType? { get set }
 }
 
 protocol ListDelegateType: NSObject, UITableViewDelegate {
-    var adapter: AdapterType? { get set }
+    var adapter: ListAdapterType? { get set }
 }
 
 class ListDataSource: NSObject, ListDataSourceType {
-    weak var adapter: AdapterType?
+    weak var adapter: ListAdapterType?
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let adapter = adapter else {
             fatalError()
@@ -36,7 +36,7 @@ class ListDataSource: NSObject, ListDataSourceType {
 }
 
 class ListDelegate: NSObject, ListDelegateType {
-    weak var adapter: AdapterType?
+    weak var adapter: ListAdapterType?
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let adapter = adapter else {
             fatalError()

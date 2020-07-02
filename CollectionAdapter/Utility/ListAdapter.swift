@@ -1,5 +1,5 @@
 //
-//  Adapter.swift
+//  ListAdapter.swift
 //  CollectionAdapter
 //
 //  Created by Nontapat Siengsanor on 23/6/2563 BE.
@@ -12,9 +12,10 @@ protocol Item { }
 protocol Configurable {
     func config(item: Item)
 }
+
 typealias ListableCell = UITableViewCell & Configurable
 
-protocol AdapterType: class {
+protocol ListAdapterType: class {
     var dataSource: ListDataSourceType { get }
     var delegate: ListDelegateType { get }
     var tableView: UITableView? { get set }
@@ -31,7 +32,7 @@ protocol AdapterType: class {
     func didSelectRow(at indexPath: IndexPath)
 }
 
-extension AdapterType {
+extension ListAdapterType {
     func register(cellClasses: [ListableCell.Type]) {
         for cellClass in cellClasses {
             tableView?.register(cellClass: cellClass.self)
@@ -64,30 +65,7 @@ extension AdapterType {
     
 }
 
-class ListAdapter: AdapterType {
-    let dataSource: ListDataSourceType
-    let delegate: ListDelegateType
-    weak var tableView: UITableView?
-    private(set) var items: [Array<Item>] = []
-    
-    init(dataSource: ListDataSourceType = ListDataSource(), delegate: ListDelegateType = ListDelegate()) {
-        self.dataSource = dataSource
-        self.delegate = delegate
-        dataSource.adapter = self
-        delegate.adapter = self
-    }
-    
-    func cellClass(for indexPath: IndexPath) -> ListableCell.Type {
-        return EkoTableViewCell.self
-    }
-    
-    func willDisplay(cell: UITableViewCell, at indexPath: IndexPath) {
-        
-    }
-    
-}
-
-class CollectionAdapter: AdapterType {
+class ListAdapter: ListAdapterType {
     let dataSource: ListDataSourceType
     let delegate: ListDelegateType
     weak var tableView: UITableView?
@@ -112,6 +90,6 @@ class CollectionAdapter: AdapterType {
 
 class EkoTableViewCell: ListableCell {
     func config(item: Item) {
-        //
+        
     }
 }
